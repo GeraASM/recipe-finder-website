@@ -4,6 +4,9 @@ import data from "@/app/api/dishes/data.json";
 import type { Dish } from "@/models/dish";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+
+
 
 export function Dishes() {
     const dishes = data as Dish[];
@@ -14,7 +17,7 @@ export function Dishes() {
     const [search, setSearch] = useState<string>("")
     const [filteredDishes, setFilteredDishes] = useState<Dish[] | undefined>(undefined);
 
-    const prep = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const prep = async () => {
         setIsPrepOpen(!isPrepOpen);
        
     }
@@ -23,17 +26,17 @@ export function Dishes() {
     }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let search = e.target.value;
-        setSearch(search);
+        const s = e.target.value;
+        setSearch(s.toLowerCase());
     }
     
     useEffect(() => {
-        let result = new Map();
+        const r = new Map();
         const verifyDishes = (prepTime: number | undefined, cookTime: number | undefined, search: string) => {
              console.log("PrepTime: ", prepTime, "CookTime: ", cookTime, "Search: ", search);
              dishes.forEach((dish: Dish) => {
                  if (dish.prepMinutes === prepTime || dish.cookMinutes == cookTime || (search && dish.title.toLocaleLowerCase().startsWith(search.toLocaleLowerCase()))) {
-                     result.set(dish.id, dish);
+                     r.set(dish.id, dish);
                  }
              }) 
 
@@ -43,7 +46,7 @@ export function Dishes() {
             verifyDishes(prepTime, cookTime, search);
         } 
         // console.log(Array.from(result.values()));
-        setFilteredDishes(Array.from(result.values()));
+        setFilteredDishes(Array.from(r.values()));
 
     }, [prepTime, cookTime, search])
     return (
@@ -107,7 +110,7 @@ export function Dishes() {
                         </form>
                 </div>
                 <form className="w-full rounded-xl md:max-w-[320px] ml-auto  md:grow lg:grow-0 bg-neutral-0 lg:ml-auto lg:min-w-[350px] lg:px-4 h-[47px] grid grid-cols-[30px_1fr] items-center px-3">
-                    <img src="/assets/images/icon-search.svg" alt="Search" />
+                    <Image width={40} height={40} src="/assets/images/icon-search.svg" alt="Search" />
                     <input value={search} onChange={handleSearch} type="search" name="search" id="search" className="text-present-7 text-neutral-900 focus:outline-0" placeholder="Search by name or ingredient ..."/>
                 </form>
             </div>
@@ -117,7 +120,7 @@ export function Dishes() {
                 filteredDishes.map((dish: Dish, key) => (
                     <div key={key} className="p-100 rounded-[10px] bg-neutral-0">
                         <figure className="rounded-[10px] overflow-hidden md:h-[450px] lg:h-[300px] h-[270px]">
-                            <img className="object-cover -translate-y-[18%] lg:translate-0 block" src={`${dish.image.large}`} alt={dish.title} />
+                            <Image width={40} height={40} className="object-cover -translate-y-[18%] lg:translate-0 block" src={`${dish.image.large}`} alt={dish.title} />
                         </figure>
                         <div className="mt-200 px-100 lg:px-0 flex flex-col gap-200 lg:h-[270px] pb-2">
                             <h4 className="text-present-5 text-neutral-900">{dish.title}</h4>
@@ -126,15 +129,15 @@ export function Dishes() {
                             </p>
                             <div className="grid grid-cols-2 lg:auto-rows-[30px]">
                                 <div className="flex gap-2 items-center">
-                                    <img src="/assets/images/icon-servings.svg" alt="Serving" />
+                                    <Image width={40} height={40} src="/assets/images/icon-servings.svg" alt="Serving" />
                                     <p className="text-present-9 text-neutral-900">Serving: {dish.servings}</p>    
                                 </div>
                                 <div className="flex gap-2 items-center">
-                                    <img src="/assets/images/icon-prep-time.svg" alt="Prep Time" />
+                                    <Image width={40} height={40} src="/assets/images/icon-prep-time.svg" alt="Prep Time" />
                                     <p className="text-present-9 text-neutral-900" >Prep: {dish.prepMinutes} mins</p>
                                 </div>
                                 <div className="flex gap-2 items-center">
-                                    <img src="/assets/images/icon-cook-time.svg" alt="Time" />
+                                    <Image width={40} height={40} src="/assets/images/icon-cook-time.svg" alt="Time" />
                                     <p className="text-present-9 text-neutral-900">Cook: {dish.cookMinutes} min</p>
                                 </div>
 

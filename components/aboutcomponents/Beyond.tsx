@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function Beyond() {
     return (
         <section className="pt-600 px-200 md:py-1000 md:px-400 xl:py-[96px] xl:flex xl:items-center xl:gap-800">
@@ -16,8 +18,8 @@ export function Beyond() {
 
                 </div>
             </div>
-            <figure className="mt-400 xl:h-[400px]">
-                <img className="rounded-[16px]" src="/assets/images/image-about-beyond-the-plate-small.webp" alt="Plate" />
+            <figure className="rounded-[16px] overflow-hidden mt-400 xl:h-[350px]">
+                <Image className=" w-full h-full object-contain" src="/assets/images/image-about-beyond-the-plate-large.webp" alt="Plate" width={400} height={100}/>
             </figure>
         </section>
     )

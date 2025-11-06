@@ -4,9 +4,6 @@ import { Built } from "@/components/homecomponents/Built";
 import { Ready } from "@/components/homecomponents/Ready";
 import { Line } from "@/components/atoms/Line";
 
-
-import { Footer } from "@/components/homecomponents/Footer";
-
 export default function Home() {
   return (
     <div className="">

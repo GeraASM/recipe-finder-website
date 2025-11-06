@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function Help() {
     return (
         <section className="pt-600 px-200 md:py-800 md:px-400 pb-800 xl:flex xl:items-center xl:gap-800 xl:py-[80px]">
@@ -15,7 +17,7 @@ export function Help() {
                 </p>
             </section>
             <figure className="mt-200 rounded-2xl overflow-hidden">
-                <img className="object-contain rounded-2xl" src="/assets/images/image-about-our-mission-small.webp" alt="Mission" />
+                <Image width={1000} height={20} className="w-full  object-contain rounded-2xl" src="/assets/images/image-about-our-mission-small.webp" alt="Mission" />
             </figure>
         </section>
     )

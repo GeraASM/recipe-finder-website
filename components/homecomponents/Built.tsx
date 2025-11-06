@@ -1,4 +1,4 @@
-
+import Image from "next/image"
 export function Built() {
 
     return (
@@ -13,7 +13,11 @@ export function Built() {
                     Whether you’re new to the kitchen or just need fresh ideas, we’ve got you covered.
                 </p>
             </div>
-            <img className="mt-8 lg:mt-0 lg:max-w-[600px] lg:object-contain  rounded-[10px] object-cover" src="/assets/images/image-home-real-life-small.webp" alt="Home Real Life" />
+            <figure className="w-[1000px] h-[300px] rounded-[10px] overflow-hidden">
+                <Image width={500} height={300} className="w-full"  src="/assets/images/image-home-real-life-large.webp" alt="Home" />
+    
+
+            </figure>
         </section>
     )
 }
